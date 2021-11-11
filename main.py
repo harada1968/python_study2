@@ -3,28 +3,29 @@ from time import sleep
 from bs4 import BeautifulSoup
 import pandas as pd
 
+MYNAVI_URL = 'https://tenshoku.mynavi.jp/'
+
 options = webdriver.ChromeOptions()
 # options.add_argument("--incognito")
 driver = webdriver.Chrome(
-    executable_path='chromedriver.exe',
-    options=options)
-driver.implicitly_wait(10)
+        executable_path='chromedriver.exe',
+        options=options)
 
-driver.get('https://tenshoku.mynavi.jp/')
-sleep(3)
-
-a_tag = driver.find_element_by_css_selector('div._CloseButton__3xX2_ > button')
-sleep(3)
-
-a_tag.click()
-sleep(5)
-
-b_tag = driver.find_element_by_css_selector('a._karte-temp-btn-close__2u7Y_')
-sleep(3)
-
-b_tag.click()
-sleep(3)
-
+def main():   
+    driver.implicitly_wait(10)
+    driver.get(MYNAVI_URL)
+    sleep(3)
+    try:
+        driver.execute_script('document.querySelector(".karte_close").click()')
+        sleep(1)
+        driver.execute_script('document.querySelector(".karte_close").click()')
+    except Exception:
+        pass 
+    
+if __name__ == "__main__":
+    main()   
+        
+    
 
 search_box = driver.find_element_by_css_selector('.topSearch__text')
 search_box.send_keys('プログラマー')
