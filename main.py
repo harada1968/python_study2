@@ -33,4 +33,8 @@ sleep(1)
 search_box.submit()
 sleep(5)
 
+soup = BeautifulSoup(driver.page_source, 'lxml')
+a_tag = soup.select('div.cassetteRecruit')
+print(len(a_tag))
+
 driver.quit()
