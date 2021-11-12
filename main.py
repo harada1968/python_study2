@@ -52,7 +52,7 @@ for company in companise:
     
     d_list.append(d)
     
-print(d_list)   
+  
     
     
     
