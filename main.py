@@ -34,7 +34,26 @@ search_box.submit()
 sleep(5)
 
 soup = BeautifulSoup(driver.page_source, 'lxml')
-a_tag = soup.select('div.cassetteRecruit')
-print(len(a_tag))
+companise = soup.select('div.cassetteRecruit')
 
+d_list = []
+
+for company in companise:
+    driver.execute_script('document.querySelector(".linkArrowS").click()')
+    sleep(2)
+    driver.execute_script('document.querySelector("li.tabNaviRecruit__item").click()')
+    sleep(2)
+    d = {'c_name': company.select_one('.companyName').text,
+         'title': company.select_one('.occName').text,
+         'job_description': company.select_one('jobPointArea__head').text,
+         'salary': company.select_one('td.jobOfferTable__body > div.text').text,
+         'url': company.get('href')   
+    }
+    
+    d_list.append(d)
+    
+print(d_list)   
+    
+    
+    
 driver.quit()
