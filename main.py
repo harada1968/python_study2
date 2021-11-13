@@ -40,8 +40,10 @@ d_list = []
 
 for company in companise:
     driver.execute_script('document.querySelector(".linkArrowS").click()')
-    sleep(2)
-    driver.execute_script('document.querySelector("li.tabNaviRecruit__item").click()')
+    sleep(3)
+    # driver.execute_script('document.querySelector(".tabNaviRecruitBottom__list > .tabNaviRecruit__item").click()')
+    com_info = driver.find_element_by_css_selector('nav.tabNaviRecruit > ul > li > a')
+    com_info.click('href')
     sleep(2)
     d = {'c_name': company.select_one('.companyName').text,
          'title': company.select_one('.occName').text,
